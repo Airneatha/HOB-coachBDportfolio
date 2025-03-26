@@ -61,39 +61,8 @@ nav a.active{
     border-bottom: 3px solid tomato;
 }
 
-@media(max-width:995px){
-    nav{
-        position: absolute;
-        display: none;
-        top: 0;
-        right:0;
-        width: 40%;
-        border-left: 3px solid tomato;
-        border-bottom: 3px solid tomato;
-        border-bottom-left-radius: 2rem;
-        padding: 1rem solid;
-        background-color: black;
-        border-top: 0.1rem solid rgba(0,0,0,0.1);
-    }
 
 
-nav.active{
-    display: block;
-}
-
-nav a{
-    display:block;
-    font-size: 2rem;
-    margin: 3rem;
-}
-
-nav a:hover,
-nav a:active{
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border-bottom: 0.5rem solid tomato;
-}
-}
 
 section{
     min-height: 100vh;
@@ -196,8 +165,8 @@ span{
     box-shadow: 0 0 25px tomato;
 }
 
-.typing-text{
-    font-size: 34px;
+.typing-text{    font-size: 34px;
+
     font-weight: 600;
     min-width: 280;
 }
@@ -223,11 +192,15 @@ span{
     animation: cursor 0.6s infinite
 }
 
-@keyframes cursor{
-    to{
-        border-left: 3px solid tomato;
+
+    @keyframes cursor{
+        border-left{
+
+            border-left: 3px solid tomato;
+        }
     }
-}
+
+
 
 @keyframes words{
     0%,20%{
@@ -247,28 +220,133 @@ span{
     }
 }
 
-@media(max-width: 1000px){
-    .home{
-        gap: 4rem;
-    }
+/* General Navbar Styles (outside media queries) */
+header nav {
+    display: flex; /* Ensure it's visible on desktop */
 }
 
-@media(max-width:995px){
-    .home{
+/* Mobile Styles (up to 768px) */
+@media (max-width: 768px) {
+    header nav {
+        display: none; /* Hide the full navigation by default on mobile */
         flex-direction: column;
-        margin: 5rem 4rem;
+        position: absolute;
+        top: 80px; /* Adjust based on your header height */
+        left: 0;
+        width: 100%;
+        background-color: black; /* Match your body's background */
+        text-align: center; /* Center links in the column */
     }
 
-    .home .home-content h3{
-        font-size: 2.5rem
+    header nav.show { /* Class to show the navigation */
+        display: flex;
     }
 
-    .home-content h1{
-        font-size: 5rem;
+    header nav a {
+        padding: 15px;
+        display: block; /* Make links full width */
+        border-bottom: 1px solid tomato; /* Use your theme color for consistency */
+        margin-left: 0; /* Override the default margin */
     }
 
-    .home-img img{
-        width: 70vh;
-        margin-top: 4rem;
+    .hamburger {
+        display: block; /* Show the hamburger icon */
+        cursor: pointer;
+        position: absolute; /* Position the hamburger icon */
+        top: 25px;
+        right: 20px;
+    }
+
+    /* Hamburger icon styles (add these outside the media query if needed) */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: tomato; /* Use your theme color */
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .home {
+        flex-direction: column; /* Stack home content on mobile */
+        gap: 2rem;
+    }
+
+    .home-img img {
+        width: 90vw; /* Make the image responsive */
+    }
+
+    .home-content h1,
+    .home-content h3,
+    .home-content p {
+        text-align: center; /* Center text on mobile */
     }
 }
+
+/* Simple Media Query with Navbar Considerations */
+
+@media (max-width: 768px) {
+    /* General adjustments for smaller screens */
+    body {
+      font-size: 16px;
+    }
+  
+    /* Navbar adjustments */
+    header {
+      flex-direction: column; /* Stack logo and nav */
+      align-items: center; /* Center items */
+      padding: 10px; /* Add padding */
+    }
+  
+    nav {
+      display: none; /* Hide nav by default */
+      flex-direction: column; /* Stack nav links */
+      width: 100%; /* Full width nav */
+      text-align: center; /* Center text */
+      margin-top: 10px; /* Add space */
+    }
+  
+    nav.active {
+      display: flex; /* Show nav when active class is applied */
+    }
+  
+    nav a {
+      display: block; /* Make links block elements */
+      padding: 10px; /* Add padding to links */
+    }
+  
+    .hamburger {
+      display: block; /* Show hamburger menu */
+      cursor: pointer; /*make the hamburger clickable*/
+    }
+  
+    /* Example: Adjusting other elements */
+    .home-content h1 {
+      font-size: 2.5rem; /* Adjust heading size */
+    }
+  }
+  
+  /* Optional: Very small screens */
+  @media (max-width: 480px) {
+      .home-content h1{
+          font-size: 2rem;
+      }
+  }
